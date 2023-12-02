@@ -1,0 +1,77 @@
+package com.escola.controller;
+
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.escola.dto.AlunoDTO;
+import com.escola.dto.NotaDTO3;
+import com.escola.dto.Relatorio;
+import com.escola.model.Aluno;
+import com.escola.service.AlunoService;
+import com.escola.service.NotaService;
+
+
+/**
+ * Classe Responsavel por Controlar Todas Requisicoes Da APP
+ * 
+ * 
+ * @author Jose Euclides - Programador
+ * @version 1.0
+ *
+ */
+
+@RestController
+@CrossOrigin(origins = "http://localhost:4200") // Permite CORS para este controlador
+public class AlunoController {
+
+    @Autowired
+    private AlunoService as;
+    
+    @Autowired
+    private NotaService ns;
+    
+
+    @PostMapping(value =  "/cadastrar-aluno/{idTurma}", consumes = "application/json",produces = "application/json")
+    public ResponseEntity<Relatorio> cadastrarAluno(@RequestBody AlunoDTO aluno, @PathVariable Long idTurma) {
+        Relatorio alunoCadastrado = as.cadastrar(aluno,idTurma);
+        return ResponseEntity.ok(alunoCadastrado);
+    }
+    
+    @GetMapping(value =  "/alunos-da-turma/{idTurma}", produces = "application/json")
+    public ResponseEntity<ArrayList<Aluno>> todosAlunos( @PathVariable Long idTurma) {
+        ArrayList<Aluno> alunosDaTurma2 = as.alunosDaTurma(idTurma);
+        return ResponseEntity.ok(alunosDaTurma2);
+    }
+    
+    @GetMapping("/aluno/{alunoId}")
+    public ResponseEntity<Aluno> obterAluno(@PathVariable Long alunoId) {
+        // Verifique se o aluno com o ID especificado existe e tem permissão para ver as notas.
+        // Dependendo da sua lógica de autenticação e autorização, você pode implementar verificações aqui.
+
+        Aluno aluno = as.obterAlunoPorId(alunoId);
+
+        return ResponseEntity.ok(aluno);
+    }
+    
+    @GetMapping("/notas/{alunoId}/{idTurma}")
+    public ResponseEntity<ArrayList<NotaDTO3>> obterNotasDoAluno(@PathVariable Long alunoId,@PathVariable Long idTurma) {
+        // Verifique se o aluno com o ID especificado existe e tem permissão para ver as notas.
+        // Dependendo da sua lógica de autenticação e autorização, você pode implementar verificações aqui.
+
+    	ArrayList<NotaDTO3> notasDoAluno = ns.listarNotasDoAluno(alunoId);
+        
+
+        return ResponseEntity.ok(notasDoAluno);
+    }
+    
+
+}
+
