@@ -19,4 +19,5 @@ public interface NotaRepository extends JpaRepository<Nota, Long> {
 	public Optional<Nota> findByIdAlunoAndTurma(Long idAluno,Turma turma);
 	public List<Nota> findByTurmaAndIdAluno(Turma turma,Long idAluno);
 	public Optional<Nota> findByIdAlunoAndTurmaAndIdDisciplina(Long idAluno,Turma turma, Long idDisciplina);
+	public List<Nota> findByTurmaAndIdDisciplina(Turma turma, Long idDisciplina);
 }

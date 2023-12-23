@@ -7,8 +7,38 @@ public class Login {
 	private Object usuario;
 	private Boolean statusLogin;
 	private String mensagem;
+	private String funcao;
+	private Long id;
+	private Long idTurma;
+	private String nome;
 	
 	
+	
+	
+	public String getFuncao() {
+		return funcao;
+	}
+	public void setFuncao(String funcao) {
+		this.funcao = funcao;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Long getIdTurma() {
+		return idTurma;
+	}
+	public void setIdTurma(Long idTurma) {
+		this.idTurma = idTurma;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 	public String getUsername() {
 		return username;
 	}

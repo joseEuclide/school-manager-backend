@@ -14,7 +14,7 @@ import com.escola.model.Secretaria;
 import com.escola.service.SecretariaService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200") // Permite CORS para este controlador
+@CrossOrigin(origins = "*")
 public class SecretariaController {
 
     @Autowired

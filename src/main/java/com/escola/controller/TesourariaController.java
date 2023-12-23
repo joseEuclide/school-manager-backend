@@ -14,7 +14,7 @@ import com.escola.model.Tesouraria;
 import com.escola.service.TesourariaService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200") // Permite CORS para este controlador
+@CrossOrigin(origins = "*")
 public class TesourariaController {
 
     @Autowired

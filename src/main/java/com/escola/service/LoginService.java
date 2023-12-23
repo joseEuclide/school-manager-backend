@@ -47,6 +47,10 @@ public class LoginService {
     			if(admin.isPresent()) {
     				login2.setStatusLogin(true);
     				login2.setUsuario(admin.get());
+    				login2.setId(admin.get().getId());
+    				login2.setNome(admin.get().getNome());
+    				login2.setFuncao("admin");
+    				
     			}
     		}
     		
@@ -56,6 +60,9 @@ public class LoginService {
     			if(tesouraria.isPresent()) {
     				login2.setStatusLogin(true);
     				login2.setUsuario(tesouraria.get());
+    				login2.setId(tesouraria.get().getId());
+    				login2.setNome(tesouraria.get().getNome());
+    				login2.setFuncao("tesouraria");
     			}
     		}
     	}else if(login.getUsername().equalsIgnoreCase("Secretaria") || login.getUsername().equalsIgnoreCase("s")) {
@@ -64,6 +71,10 @@ public class LoginService {
     			if(secretaria.isPresent()) {
     				login2.setStatusLogin(true);
     				login2.setUsuario(secretaria.get());
+    				login2.setId(secretaria.get().getId());
+    				login2.setNome(secretaria.get().getNome());
+    				login2.setFuncao("secretaria");
+    				
     			}
     		}
     	}else if(login.getUsername().equalsIgnoreCase("Professor") || login.getUsername().equalsIgnoreCase("p")) {
@@ -72,15 +83,25 @@ public class LoginService {
     			if(professor.isPresent()) {
     				login2.setStatusLogin(true);
     				login2.setUsuario(professor.get());
+    				login2.setId(professor.get().getId());
+    				login2.setNome(professor.get().getNome());
+    				login2.setFuncao("professor");
+    				
+    				
     			}
     		}
-    	}else if(login.getUsername() != null && login.getPassword() != null) {
+    	}else if(login.getUsername().equalsIgnoreCase("aluno") && login.getPassword() != null) {
     		try {
     			Long idAluno = Long.parseLong(login.getUsername());
         		Optional<Aluno> aluno=  ar.findById(idAluno);
         			if(aluno.isPresent()) {
         				login2.setStatusLogin(true);
         				login2.setUsuario(aluno.get());
+        				login2.setId(aluno.get().getId());
+        				login2.setIdTurma(aluno.get().getTurma().getId());
+        				login2.setNome(aluno.get().getNome());
+        				login2.setFuncao("aluno");
+        				
         			}
     		}catch (Exception e) {
     			login2.setStatusLogin(false);
@@ -90,6 +111,8 @@ public class LoginService {
     	}else if(login.getUsername().equalsIgnoreCase("cadastrar") || login.getPassword().equalsIgnoreCase("cadastrar")) {
     				login2.setStatusLogin(true);
     				login2.setMensagem("cadastrar");
+    	}else {
+    		login2.setStatusLogin(false);
     	}
         return login2;
     }

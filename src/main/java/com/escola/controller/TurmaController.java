@@ -21,7 +21,7 @@ import com.escola.service.CursoService;
 import com.escola.service.TurmaService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200") // Permite CORS para este controlador
+@CrossOrigin(origins = "*")
 public class TurmaController {
 	
 	@Autowired

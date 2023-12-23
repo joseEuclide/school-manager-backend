@@ -1,5 +1,6 @@
 package com.escola.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -15,9 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.escola.dto.ApiResponse;
 import com.escola.dto.NotaDTO;
+import com.escola.dto.ProfessorDTO2;
+import com.escola.dto.ProfessorDetalheDTO;
 import com.escola.dto.TurmaDTO2;
 import com.escola.model.Curso;
 import com.escola.model.Disciplina;
+import com.escola.model.Nota;
 import com.escola.model.Professor;
 import com.escola.model.ProfessorDisciplinasTurma;
 import com.escola.model.Turma;
@@ -28,7 +32,7 @@ import com.escola.service.ProfessorService;
 import com.escola.service.TurmaService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200") // Permite CORS para este controlador
+@CrossOrigin(origins = "*")
 public class ProfessorController {
 
     @Autowired
@@ -107,9 +111,10 @@ public class ProfessorController {
     }
     
     @GetMapping("/lista-turmas-do-professor/{idProfessor}")
-    public ResponseEntity<Set<Turma>> listarTurmasDoProfessor(@PathVariable Long idProfessor) {
+    public ResponseEntity<ArrayList<ProfessorDetalheDTO>> listarTurmasDoProfessor(@PathVariable Long idProfessor) {
     	Set<Turma> turmasDoProfessor = professorService.listarTurmasDoProfessor(idProfessor);
-    	return ResponseEntity.ok(turmasDoProfessor);
+    	ArrayList<ProfessorDetalheDTO> turmas = professorService.listarTurmasDoProfessor2(turmasDoProfessor);
+    	return ResponseEntity.ok(turmas);
     }
     /*
     @PostMapping("/atribuir-permissao/{professorId}")
@@ -125,9 +130,15 @@ public class ProfessorController {
     
     
     @PostMapping(value =  "/lancar-notas-turma/{idTurma}/{idProf}/{idDisciplina}", consumes = "application/json",produces = "application/json")
-    public ResponseEntity<String> lancarNotasDeUmaTurma(@PathVariable Long idTurma,@PathVariable Long idProf,@PathVariable Long idDisciplina ,@RequestBody List<NotaDTO> notaDto) {
+    public ResponseEntity<ProfessorDTO2> lancarNotasDeUmaTurma(@PathVariable Long idTurma,@PathVariable Long idProf,@PathVariable Long idDisciplina ,@RequestBody List<NotaDTO> notaDto) {
     	String mensagem = ns.lançarNotasParaDisciplina(idProf, idTurma, idDisciplina, notaDto);
-        return ResponseEntity.ok(mensagem);
+        
+    	List<Nota> notas =  ns.listarNotasPorTurmahDisciplina(idTurma, idDisciplina);
+    	
+    	ProfessorDTO2 pd2 = new ProfessorDTO2();
+    	pd2.setMensagem(mensagem);
+    	pd2.setNotas(notas);
+    	return ResponseEntity.ok(pd2);
     }
  
     

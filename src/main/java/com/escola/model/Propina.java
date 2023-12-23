@@ -18,16 +18,21 @@ public class Propina {
   private Long id;
 
   private LocalDate data;
-  private Double setembro;
-  private Double Outubro;
-  private Double novembro;
-  private Double dezembro;
+  
+  
+  
   private Double janeiro;
   private Double fevereiro;
   private Double marco;
   private Double abril;
   private Double maio;
   private Double junho;
+  private Double julho;
+  private Double agosto;
+  private Double setembro;
+  private Double Outubro;
+  private Double novembro;
+  private Double dezembro;
 
   @ManyToOne
   @JoinColumn(name = "aluno_id")
@@ -68,6 +73,21 @@ public void setTurma(Turma turma) {
 		return id;
 	}
 
+	public Double getAgosto() {
+		return agosto;
+	}
+
+	public void setAgosto(Double agosto) {
+		this.agosto = agosto;
+	}
+
+    public Double getJulho() {
+		return julho;
+	}
+
+	public void setJulho(Double julho) {
+		this.julho = julho;
+	}
 	public Double getSetembro() {
 		return setembro;
 	}

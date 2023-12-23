@@ -193,6 +193,7 @@ public class PropinaService {
     	Optional<Turma> t2 = tr.findById(propinaDTO.getIdTurma());
         Optional<Aluno> aluno = ar.findById(propinaDTO.getIdAluno());
         if(aluno.isPresent() && t2.isPresent()) {
+			 System.out.println("============= Existe Aluno Com Esses Dados Financeiros");
         	 prop = pr.findByAlunoAndTurma(aluno.get(), t2.get());
              return prop.get();   
              

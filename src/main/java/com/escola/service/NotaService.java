@@ -85,10 +85,10 @@ public class NotaService {
     	
     }
     
-    public ArrayList<NotaDTO3> listarNotasDoAluno(Long alunoId) {
+    public List<Nota> listarNotasDoAluno(Long alunoId) {
         // Verifique se o aluno com o ID especificado existe no banco de dados
     	
-    	
+    	List<Nota> n2 = null;
     	ArrayList<NotaDTO3> notasDTOs3 = new ArrayList<>();
         Optional<Aluno> alunoOptional = alunoRepository.findById(alunoId);
         if (!alunoOptional.isPresent()) {
@@ -99,13 +99,14 @@ public class NotaService {
         Aluno aluno = alunoOptional.get();
        
         // Consulte todas as notas associadas a este aluno
-        List<Nota> n2 =  nr.findByTurmaAndIdAluno(  aluno.getTurma(),alunoId);
+        n2 =  nr.findByTurmaAndIdAluno(  aluno.getTurma(),alunoId);
         
         ArrayList<Disciplina> disciplinasDaTurma = dr.findByCursoAndNivel(aluno.getTurma().getCurso(), aluno.getTurma().getNivel());
 		
         
         if(n2 != null) {
-        	for(Nota cadaC : n2) {
+
+        	/*for(Nota cadaC : n2) {
         		NotaDTO3 notaDTO3 = new NotaDTO3();
     			sair:
     			for(Disciplina cadaC2: disciplinasDaTurma) {
@@ -119,12 +120,12 @@ public class NotaService {
     				}
     			}
     		}
+			*/
         	System.out.println("MMMMMMMMMMMMMMMM   TEM ALUNO ==================");
-        	
-        	return notasDTOs3;
+        	return n2;
         }else {
         	System.out.println("MMMMMMMMMMMMMMMM  NAO TEM ALUNO ==================");
-        	return notasDTOs3;
+        	return n2;
         }
         
     }
@@ -141,7 +142,7 @@ public class NotaService {
     // Outros métodos relacionados a notas, se necessário
 
 
-public boolean lancarNotas(List<NotaDTO> notaDtos, Long idDisciplina,
+   public boolean lancarNotas(List<NotaDTO> notaDtos, Long idDisciplina,
 		Turma turma, Long idProf,String tipoDeProva) {
 
 	boolean retorno = false;	
@@ -170,10 +171,12 @@ public boolean lancarNotas(List<NotaDTO> notaDtos, Long idDisciplina,
 						System.out.println( " =======================  Entrou nnesse NIVEL");
 						novaNota2 = tipoDeProva(novaNota, idDisciplina, tipoDeProva, n.getNotaDoAluno());
 						nr.saveAndFlush(novaNota2);
+						
 					}else {
 						System.out.println( " =======================  OOOOOOOOOO");
 						novaNota2 = tipoDeProva2(novaNota, idDisciplina, tipoDeProva, n.getNotaDoAluno());
 						nr.saveAndFlush(novaNota2);
+						
 					}	
 					
 				    
@@ -278,5 +281,17 @@ public boolean lancarNotas(List<NotaDTO> notaDtos, Long idDisciplina,
 	
 		return n2;
   }
+   
+   public List<Nota> listarNotasPorTurmahDisciplina(Long idTurma, Long idDisciplina) {
+	   
+	   Optional<Turma> turma =  tr.findById(idTurma);
+	   if(turma.isPresent()) {
+	   		System.out.println("tem turma");
+	   		return nr.findByTurmaAndIdDisciplina(turma.get(), idDisciplina);
+	   	}else { return null; }
+	   
+	   
+   	
+   }
 
 }

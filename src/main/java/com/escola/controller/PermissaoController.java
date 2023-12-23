@@ -17,7 +17,7 @@ import com.escola.repository.ProfessorRepository;
 import com.escola.service.PermissaoService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200") // Permite CORS para este controlador
+@CrossOrigin(origins = "*")
 public class PermissaoController {
    
 	@Autowired

@@ -15,6 +15,9 @@ public class AdminService {
     @Autowired
     private AdminRepository adR;
 
+    public Admin cadastrarUmAdmin(Admin admin) {
+    	return adR.save(admin);
+    }
     public List<Admin> cadastrarListaAdmins(List<Admin> admins) {
         return adR.saveAll(admins);
     }

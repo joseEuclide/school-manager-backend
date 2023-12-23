@@ -16,7 +16,7 @@ import com.escola.repository.SalarioRepository;
 import com.escola.service.SalarioService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200") // Permite CORS para este controlador
+@CrossOrigin(origins = "*")
 public class SalarioController {
 	
 	@Autowired

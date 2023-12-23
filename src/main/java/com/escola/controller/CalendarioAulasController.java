@@ -14,7 +14,7 @@ import com.escola.model.CalendarioAulas;
 import com.escola.service.CalendarioAulasService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200") // Permite CORS para este controlador
+@CrossOrigin(origins = "*")
 public class CalendarioAulasController {
     private final CalendarioAulasService calendarioAulasService;
 

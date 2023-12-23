@@ -17,7 +17,7 @@ import com.escola.service.PropinaService;
 import com.escola.model.Propina;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200") // Permite CORS para este controlador
+@CrossOrigin(origins = "*")
 public class PagamentoPropinasController {
     private final PropinaService propinaService;
 
@@ -49,6 +49,10 @@ public class PagamentoPropinasController {
         PropinaDTO p = new PropinaDTO();
         p.setIdAluno(idAluno);
         p.setIdTurma(idTurma);
+
+        System.out.println("DADOS DO ALUNO  PARA AS PROPINAS ============");
+        System.out.println("idAluno: "+idAluno);
+        System.out.println("idTurma: "+idTurma);
         
         Propina dadosFinanceiroAluno = propinaService.dadosFinanceirosDoAluno2(p);
         return ResponseEntity.ok(dadosFinanceiroAluno);

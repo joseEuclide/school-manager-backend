@@ -18,7 +18,7 @@ import com.escola.model.EditarNota;
 import com.escola.service.EditarNotaService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200") // Permite CORS para este controlador
+@CrossOrigin(origins = "*")
 @RequestMapping("/editar-notas")
 public class EditarNotaController {
 	

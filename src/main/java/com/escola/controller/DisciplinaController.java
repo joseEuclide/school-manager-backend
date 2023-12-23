@@ -27,7 +27,7 @@ import com.escola.service.DisciplinaService;
  */
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200") // Permite CORS para este controlador
+@CrossOrigin(origins = "*")
 public class DisciplinaController {
 
     @Autowired

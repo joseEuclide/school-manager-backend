@@ -1,6 +1,7 @@
 package com.escola.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import com.escola.dto.Relatorio;
 import com.escola.model.Aluno;
 import com.escola.service.AlunoService;
 import com.escola.service.NotaService;
+import com.escola.model.Nota;
 
 
 /**
@@ -62,11 +64,14 @@ public class AlunoController {
     }
     
     @GetMapping("/notas/{alunoId}/{idTurma}")
-    public ResponseEntity<ArrayList<NotaDTO3>> obterNotasDoAluno(@PathVariable Long alunoId,@PathVariable Long idTurma) {
+    public ResponseEntity<List<Nota>> obterNotasDoAluno(@PathVariable Long alunoId,@PathVariable Long idTurma) {
         // Verifique se o aluno com o ID especificado existe e tem permissão para ver as notas.
         // Dependendo da sua lógica de autenticação e autorização, você pode implementar verificações aqui.
 
-    	ArrayList<NotaDTO3> notasDoAluno = ns.listarNotasDoAluno(alunoId);
+        System.out.println("DADOS DO ALUNO  PARA AS NOTAS ============");
+        System.out.println("alunoId: "+alunoId);
+        System.out.println("IdTurma: "+idTurma);
+    	List<Nota> notasDoAluno = ns.listarNotasDoAluno(alunoId);
         
 
         return ResponseEntity.ok(notasDoAluno);

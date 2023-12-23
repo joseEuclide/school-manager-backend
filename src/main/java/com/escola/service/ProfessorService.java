@@ -9,6 +9,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.escola.dto.ProfessorDetalheDTO;
 import com.escola.model.Curso;
 import com.escola.model.Permissao;
 import com.escola.model.Professor;
@@ -124,6 +125,27 @@ public class ProfessorService {
         	}
         }
         return turmas; 
+    }
+    
+    public ArrayList<ProfessorDetalheDTO> listarTurmasDoProfessor2(Set<Turma> turmas) {
+    	    ArrayList<ProfessorDetalheDTO> turmasDoProfessor = new ArrayList<>();
+        	if(turmas != null) {
+        		for(Turma t : turmas) {
+        			
+        		    
+        			
+        			ProfessorDetalheDTO pDDTO = new ProfessorDetalheDTO();
+        			pDDTO.setId(t.getId());
+        			pDDTO.setCurso(t.getCurso().getNome());
+        			pDDTO.setNome(t.getNome());
+        			pDDTO.setTurno(t.getTurno());
+        			pDDTO.setNivel(t.getNivel());
+        			
+        			turmasDoProfessor.add(pDDTO);
+        		}
+        	}
+        
+        return turmasDoProfessor; 
     }
 
     // Outros métodos relacionados a professores, se necessário

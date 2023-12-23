@@ -1,5 +1,7 @@
 package com.escola.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,4 +24,15 @@ public class PrecoPropinaService {
 		 }
          
     }
+	
+	 @Autowired
+	    private PrecoPropinaRepository precoPropinaRepository;
+
+	    public List<PrecoPropina> listarTodosPrecos() {
+	        return precoPropinaRepository.findAll();
+	    }
+
+	    public List<PrecoPropina> cadastrarPrecos(List<PrecoPropina> precos) {
+	        return precoPropinaRepository.saveAll(precos);
+	    }
 }

@@ -16,7 +16,7 @@ import com.escola.relatorio.RelatorioService;
 import com.escola.service.AlunoService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200") // Permite CORS para este controlador
+@CrossOrigin(origins = "*")
 public class RelatorioController {
 	@Autowired
     private RelatorioService relatorioService;

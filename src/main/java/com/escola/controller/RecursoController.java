@@ -18,7 +18,7 @@ import com.escola.model.Turma;
 import com.escola.service.RecursoService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200") // Permite CORS para este controlador
+@CrossOrigin(origins = "*")
 @RequestMapping("/recursos")
 public class RecursoController {
     @Autowired

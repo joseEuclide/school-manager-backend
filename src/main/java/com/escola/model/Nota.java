@@ -53,9 +53,16 @@ public class Nota {
     private Long idDisciplina;
     private Long idAluno;
     
+	private String disciplina;
     
     
-    
+    public String getDisciplina() {
+		return disciplina;
+	}
+
+	public void setDisciplina(String disciplina) {
+		this.disciplina = disciplina;
+	}
 	public double getMac1() {
 		return mac1;
 	}
