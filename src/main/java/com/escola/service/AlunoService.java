@@ -13,6 +13,7 @@ import com.escola.model.Disciplina;
 import com.escola.model.Nota;
 import com.escola.model.Propina;
 import com.escola.model.Turma;
+import com.escola.relatorio.RelatorioService;
 import com.escola.repository.AlunoRepository;
 import com.escola.repository.DisciplinaRepository;
 import com.escola.repository.NotaRepository;
@@ -39,12 +40,15 @@ public class AlunoService {
     
     @Autowired
 	private DisciplinaRepository dr;
+    
+    @Autowired
+    private RelatorioService relatorioService;
 
     
     //@Autowired
     //private RelatorioService rs;
     
-    public Relatorio cadastrar(AlunoDTO alunoDTO,Long idTurma) {
+    public Relatorio cadastrar(AlunoDTO alunoDTO,Long idTurma)  {
     	
     	Relatorio relatorio = new Relatorio();
     	relatorio.setRetorno(false);
@@ -59,7 +63,14 @@ public class AlunoService {
         		relatorio.setMensagem("Aluno Cadastrado Com Sucesso");
         		// relatorio.setRetorno(null);
         		Aluno aluno2 =ar.saveAndFlush(aluno);
-        		
+        		byte[] pdfBytes = null;
+				try {
+					pdfBytes = relatorioService.gerarRelatorioAlunoMatricula(aluno2);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+        		relatorio.setNovoRelatorio(pdfBytes);
         		
         		
         		
@@ -149,6 +160,9 @@ public class AlunoService {
        
        
    }
+   
+   
+  
   
 
 

@@ -13,7 +13,7 @@ import com.escola.model.Aluno;
 import com.escola.model.PrecoPropina;
 import com.escola.model.Propina;
 import com.escola.model.Turma;
-import com.escola.relatorio.RelatorioService;
+//import com.escola.relatorio.RelatorioService;
 import com.escola.repository.AlunoRepository;
 import com.escola.repository.PrecoPropinaRepository;
 import com.escola.repository.PropinaRepository;
@@ -34,8 +34,8 @@ public class PropinaService {
 	@Autowired
     private PrecoPropinaRepository ppr;
 	
-	@Autowired
-    private RelatorioService relatorioService;
+	//@Autowired
+    //private RelatorioService relatorioService;
 
     public PagamentoDTO registrarPagamento(PropinaDTO propinaDTO) throws Exception {
      
@@ -86,6 +86,12 @@ public class PropinaService {
             	    		 if(c.equalsIgnoreCase("Junho")) {
             	    			 prop.get().setJunho(p3.get().getValor());
             	    		 }
+            	    		 if(c.equalsIgnoreCase("Julho")) {
+            	    			 prop.get().setJulho(p3.get().getValor());
+            	    		 }
+            	    		 if(c.equalsIgnoreCase("Agosto")) {
+            	    			 prop.get().setAgosto(p3.get().getValor());
+            	    		 }
             	    	 }
                     	 
                     	 
@@ -93,8 +99,8 @@ public class PropinaService {
                     	 statusPagamento = "Pagamento Efectuado Com Sucesso !";
                     	 p.setMensagem(statusPagamento);
 
-                         byte[] pdfBytes = relatorioService.gerarRelatorioAluno(aluno.get());
-            	         p.setRelatorio(pdfBytes);
+                         //byte[] pdfBytes = relatorioService.gerarRelatorioAlunoPropina(aluno.get());
+            	         p.setRelatorio(null);
             	     }
             	 
             	 
@@ -124,37 +130,53 @@ public class PropinaService {
         if(aluno.isPresent() && t2.isPresent()) {
         	 Optional<Propina> prop =pr.findByAlunoAndTurma(aluno.get(), t2.get());
                  if(prop.isPresent()) {
-            	 
+            	 System.out.println("==========> "+prop.get().getMarco());
 		                	 
-            	    		 if( prop.get().getSetembro() == null) {
-            	    			 mesesAPagar.add("Setembro");
-            	    		 }
-            	    		 if(prop.get().getOutubro()==null) {
-		    	    			 mesesAPagar.add("Outubro");
-		    	    		 }
-            	    		 if(prop.get().getNovembro()==null) {
-            	    			 mesesAPagar.add("Novembro");
-            	    		 }
-            	    		 if(prop.get().getDezembro()==null) {
-            	    			 mesesAPagar.add("Dezembro");
-            	    		 }
-            	    		 if(prop.get().getJaneiro()==null) {
+            	    		 
+            	    		 if(prop.get().getJaneiro()==0) {
+            	    			 System.out.println("Janeiro");
             	    			 mesesAPagar.add("Janeiro");
             	    		 }
-            	    		 if(prop.get().getFevereiro()==null) {
+            	    		 if(prop.get().getFevereiro()==0) {
+            	    			 System.out.println("Fevereiro");
             	    			 mesesAPagar.add("Fevereiro");
             	    		 }
-            	    		 if(prop.get().getMarco()==null) {
+            	    		 if(prop.get().getMarco()==0) {
+            	    			 System.out.println("Março");
             	    			 mesesAPagar.add("Marco");
             	    		 }
-            	    		 if(prop.get().getAbril()==null) {
+            	    		 if(prop.get().getAbril()==0) {
+            	    			 System.out.println("Abril");
             	    			 mesesAPagar.add("Abril");
             	    		 }
-            	    		 if(prop.get().getMaio()==null) {
+            	    		 if(prop.get().getMaio()==0) {
+            	    			 System.out.println("Maio");
             	    			 mesesAPagar.add("Maio");
             	    		 }
-            	    		 if(prop.get().getJunho()==null) {
+            	    		 if(prop.get().getJunho()==0) {
+            	    			 System.out.println("Junho");
             	    			 mesesAPagar.add("Junho");
+            	    		 }if(prop.get().getJulho()==0) {
+            	    			 System.out.println("Julho");
+            	    			 mesesAPagar.add("Julho");
+            	    		 }if(prop.get().getAgosto()==0) {
+            	    			 System.out.println("Agosto");
+            	    			 mesesAPagar.add("Agosto");
+            	    		 }if( prop.get().getSetembro() == 0) {
+            	    			 System.out.println("Setembro");
+            	    			 mesesAPagar.add("Setembro");
+            	    		 }
+            	    		 if(prop.get().getOutubro()==0) {
+            	    			 System.out.println("Outubro");
+		    	    			 mesesAPagar.add("Outubro");
+		    	    		 }
+            	    		 if(prop.get().getNovembro()==0) {
+            	    			 System.out.println("Novembro");
+            	    			 mesesAPagar.add("Novembro");
+            	    		 }
+            	    		 if(prop.get().getDezembro()==0) {
+            	    			 System.out.println("Dezembro");
+            	    			 mesesAPagar.add("Dezembro");
             	    		 }
             	    	 
                     	     System.out.println("============= Aluno:\n\n");
@@ -189,7 +211,6 @@ public class PropinaService {
         // Verifique se já existe um pagamento registrado para o aluno, mês e ano especificados.
         // Se sim, você pode atualizar o pagamento existente em vez de criar um novo.
         Optional<Propina> prop = null;
-    	ArrayList<String> mesesAPagar = new ArrayList<>();
     	Optional<Turma> t2 = tr.findById(propinaDTO.getIdTurma());
         Optional<Aluno> aluno = ar.findById(propinaDTO.getIdAluno());
         if(aluno.isPresent() && t2.isPresent()) {

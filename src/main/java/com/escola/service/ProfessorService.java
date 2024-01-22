@@ -41,7 +41,9 @@ public class ProfessorService {
     
 
 	 public Professor cadastrarProfessor(Professor professor) {
+		 
 		 Optional<String> prof = pr.findBiByBi(professor.getBi());
+	     
 		 if(prof.isPresent()) {
 			 return new Professor();
 		 }else {
@@ -53,6 +55,8 @@ public class ProfessorService {
     		 profPErmissao.setProfessorPermissoes(prof2);
     		 profPErmissao.setIdProf(prof2.getId());
     		 permissaoRepository.saveAndFlush(profPErmissao);
+    		 
+    		 //Setando A Lista de Cursos Possiveis Para Cadatrar o Professor
     		 
     		 List<Curso> cursos = cr.findAll();
     		 ArrayList<Curso> cursos2 = new ArrayList<>();
@@ -79,12 +83,12 @@ public class ProfessorService {
             		
             		pdtr.saveAndFlush(prof);
         		}
-        		return "PRofessor Cadastrado Com Sucesso !";
+        		return "Professor Cadastrado Com Sucesso !";
      		
     		
     		
     	}else {
-    		return "PRofessor Nao Cadastrado";
+    		return "Professor Nao Foi Cadastrado";
     	}
 
     }

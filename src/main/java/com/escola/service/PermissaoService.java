@@ -41,6 +41,7 @@ public class PermissaoService {
         	    		 p2.setLancarNaEscola(permissao.getPermissao().isLancarNaEscola());
         	    		 p2.setTipoDeProva(permissao.getPermissao().getTipoDeProva());
         	    		 permissaoRepository.saveAndFlush(p2);
+        	    		 System.out.println("Permissao Cadastrada Com sucesso ! ");
     	    		 
     	    		
     	    	

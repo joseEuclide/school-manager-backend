@@ -1,19 +1,19 @@
 package com.escola.dto;
 
-import java.util.List;
+import java.util.ArrayList;
 
-import com.escola.model.Nota;
+import com.escola.model.Aluno;
 
 public class ProfessorDTO2 {
 	
-	private List<Nota> notas;
+	private ArrayList<Aluno> notas;
 	private String mensagem;
 	
 	
-	public List<Nota> getNotas() {
+	public ArrayList<Aluno> getNotas() {
 		return notas;
 	}
-	public void setNotas(List<Nota> notas) {
+	public void setNotas(ArrayList<Aluno> notas) {
 		this.notas = notas;
 	}
 	public String getMensagem() {

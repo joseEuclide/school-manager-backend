@@ -19,6 +19,7 @@ import com.escola.dto.NotaDTO;
 import com.escola.dto.ProfessorDTO2;
 import com.escola.dto.ProfessorDetalheDTO;
 import com.escola.dto.TurmaDTO2;
+import com.escola.model.Aluno;
 import com.escola.model.Curso;
 import com.escola.model.Disciplina;
 import com.escola.model.Nota;
@@ -110,7 +111,7 @@ public class ProfessorController {
         }
     }
     
-    @GetMapping("/lista-turmas-do-professor/{idProfessor}")
+    @GetMapping("/listar-turmas-do-professor/{idProfessor}")
     public ResponseEntity<ArrayList<ProfessorDetalheDTO>> listarTurmasDoProfessor(@PathVariable Long idProfessor) {
     	Set<Turma> turmasDoProfessor = professorService.listarTurmasDoProfessor(idProfessor);
     	ArrayList<ProfessorDetalheDTO> turmas = professorService.listarTurmasDoProfessor2(turmasDoProfessor);
@@ -133,11 +134,31 @@ public class ProfessorController {
     public ResponseEntity<ProfessorDTO2> lancarNotasDeUmaTurma(@PathVariable Long idTurma,@PathVariable Long idProf,@PathVariable Long idDisciplina ,@RequestBody List<NotaDTO> notaDto) {
     	String mensagem = ns.lançarNotasParaDisciplina(idProf, idTurma, idDisciplina, notaDto);
         
+    	ArrayList<Aluno> notasDosAlunos = new ArrayList<>();
+    	
     	List<Nota> notas =  ns.listarNotasPorTurmahDisciplina(idTurma, idDisciplina);
+    	int j;
+    	for(int i=0; i< notas.size();i++) {
+    		j = i + 1;
+    		System.out.println("entrou no aluno.....");
+    		System.out.println(" aluno "+j);
+    		Aluno aluno = new Aluno();
+    		
+    		aluno.setNota(notaDto.get(i).getNotaDoAluno());
+    		aluno.setNome(notas.get(i).getAluno().getNome());
+    		notasDosAlunos.add(aluno);
+    		
+    		
+    	}
     	
     	ProfessorDTO2 pd2 = new ProfessorDTO2();
     	pd2.setMensagem(mensagem);
-    	pd2.setNotas(notas);
+    	if(mensagem.contains("notas Lançadas Com Sucesso")) {
+    		pd2.setNotas(notasDosAlunos);
+    	}else {
+    		pd2.setNotas(null);
+    	}
+    	
     	return ResponseEntity.ok(pd2);
     }
  

@@ -11,6 +11,6 @@ import com.escola.model.ProfessorDisciplinasTurma;
 @Repository
 public interface ProfessorDisciplinasTurmaRepository extends JpaRepository<ProfessorDisciplinasTurma, Long>{
    
-    Optional<List<ProfessorDisciplinasTurma>> findDisciplinasByIdProfAndIdTurma(Long idProf,Long idTurma);
+    Optional<List<ProfessorDisciplinasTurma>> findByIdProfAndIdTurma(Long idProf,Long idTurma);
     Optional<List<ProfessorDisciplinasTurma>> findByIdProf(Long idProf);
 }

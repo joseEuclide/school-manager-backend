@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.escola.dto.AlunoDTO;
-import com.escola.dto.NotaDTO3;
 import com.escola.dto.Relatorio;
 import com.escola.model.Aluno;
 import com.escola.service.AlunoService;

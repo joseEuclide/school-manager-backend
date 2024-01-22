@@ -34,7 +34,7 @@ public class RelatorioController {
         try {
             Aluno aluno = as.obterAlunoPorId(alunoId); // Obtenha os dados do aluno
 
-            byte[] pdfBytes = relatorioService.gerarRelatorioAluno(aluno);
+            byte[] pdfBytes = relatorioService.gerarRelatorioAlunoPropina(aluno);
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
@@ -43,7 +43,8 @@ public class RelatorioController {
             return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
         } catch (Exception e) {
             // Lida com erros, por exemplo, aluno não encontrado, erro de geração de relatório, etc.
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            e.printStackTrace();
+        	return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

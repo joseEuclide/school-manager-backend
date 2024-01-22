@@ -1,6 +1,5 @@
 package com.escola.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,15 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.escola.dto.NotaDTO;
-import com.escola.dto.NotaDTO3;
 import com.escola.model.Aluno;
-import com.escola.model.Disciplina;
 import com.escola.model.Nota;
 import com.escola.model.Permissao;
 import com.escola.model.Professor;
 import com.escola.model.Turma;
 import com.escola.repository.AlunoRepository;
-import com.escola.repository.DisciplinaRepository;
 import com.escola.repository.NotaRepository;
 import com.escola.repository.PermissaoRepository;
 import com.escola.repository.ProfessorRepository;
@@ -41,8 +37,7 @@ public class NotaService {
     @Autowired
     private ProfessorRepository pr;
     
-    @Autowired
-    private DisciplinaRepository dr;
+
 
     public String lançarNotasParaDisciplina( Long idProf,Long idTurma,Long idDisciplina,List<NotaDTO> notaDtos) {
        
@@ -66,18 +61,18 @@ public class NotaService {
     	    			Optional<Turma>  turma = tr.findById(idTurma);
     	    			if(turma.isPresent()) {
     	    				System.out.println("NOvooooooooooooooooooooooo");
-    	    				lancarNotas(notaDtos, idDisciplina, turma.get(), idProf, permissao.getTipoDeProva());
+    	    				retorno =  lancarNotas(notaDtos, idDisciplina, turma.get(), idProf, permissao.getTipoDeProva());
     	    			}else {
     	    				retorno = "Não Estás Cadastrado Na Turma Que Pretendes Lançar Essas Notas";
     	    			}
     	    			
     	    			
     	    		}else {
-    	    			retorno = "Nao Tens Autorizacao Para Lancar as Provas, Dirija-se a Directoria";
+    	    			retorno = "Nao Tens Autorizacao Para Lancar as Provas, Dirija-se a Directoria Ou A Uma Direcção Similar ";
     	    		}
     	    		 		
     	    	}else {
-    	    		retorno = "Esse Professor Não Tem A Permissão de Lançar as Notas";
+    	    		retorno = " Não Tens A Permissão de Lançar as Notas";
     	    	}
     		
     	}
@@ -89,7 +84,6 @@ public class NotaService {
         // Verifique se o aluno com o ID especificado existe no banco de dados
     	
     	List<Nota> n2 = null;
-    	ArrayList<NotaDTO3> notasDTOs3 = new ArrayList<>();
         Optional<Aluno> alunoOptional = alunoRepository.findById(alunoId);
         if (!alunoOptional.isPresent()) {
             // Trate o caso em que o aluno não foi encontrado
@@ -101,7 +95,6 @@ public class NotaService {
         // Consulte todas as notas associadas a este aluno
         n2 =  nr.findByTurmaAndIdAluno(  aluno.getTurma(),alunoId);
         
-        ArrayList<Disciplina> disciplinasDaTurma = dr.findByCursoAndNivel(aluno.getTurma().getCurso(), aluno.getTurma().getNivel());
 		
         
         if(n2 != null) {
@@ -142,10 +135,10 @@ public class NotaService {
     // Outros métodos relacionados a notas, se necessário
 
 
-   public boolean lancarNotas(List<NotaDTO> notaDtos, Long idDisciplina,
+   public String lancarNotas(List<NotaDTO> notaDtos, Long idDisciplina,
 		Turma turma, Long idProf,String tipoDeProva) {
 
-	boolean retorno = false;	
+	String retorno = "";	
 	int contador = 0;
 	for(NotaDTO n :notaDtos) {
 		
@@ -157,6 +150,7 @@ public class NotaService {
 			Nota novaNota2 = null;
 			System.out.println("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ\n\n\n");
 			novaNota.setProfessor(prof.get());
+			    // Niveis sem Ezame !
 				if(novaNota.getIdDisciplina()==idDisciplina) {
 					if(turma.getNivel().equalsIgnoreCase("10") ||
 					   turma.getNivel().equalsIgnoreCase("11") ||
@@ -171,11 +165,14 @@ public class NotaService {
 						System.out.println( " =======================  Entrou nnesse NIVEL");
 						novaNota2 = tipoDeProva(novaNota, idDisciplina, tipoDeProva, n.getNotaDoAluno());
 						nr.saveAndFlush(novaNota2);
+						++contador;
 						
 					}else {
+						// Niveis com Ezame !
 						System.out.println( " =======================  OOOOOOOOOO");
 						novaNota2 = tipoDeProva2(novaNota, idDisciplina, tipoDeProva, n.getNotaDoAluno());
 						nr.saveAndFlush(novaNota2);
+						++contador;
 						
 					}	
 					
@@ -184,11 +181,16 @@ public class NotaService {
 				
 			
 			
-			retorno = true;
+			
 		}
 		
-		++contador;
+		
 		System.out.println(contador+"º Nota Lancada");
+	}
+	if(contador == notaDtos.size()) {
+		retorno = "notas Lançadas Com Sucesso !";
+	}else {
+		retorno = "Falha Ao Lançar as Notas dos Alunos, Tente Novamente !";;
 	}
 	
 	

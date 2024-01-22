@@ -40,25 +40,40 @@ public class ProfessorDisciplinasTurmaService {
     }
     
    public Set<Disciplina> disiciplinasDoProfessor(Long idProf, Long idTurma){
-	   Optional<List<ProfessorDisciplinasTurma>>  dados = pdtr.findDisciplinasByIdProfAndIdTurma(idProf, idTurma);
+	   Optional<List<ProfessorDisciplinasTurma>>  dados = pdtr.findByIdProfAndIdTurma(idProf, idTurma);
 	   Set<Disciplina> disciplinas2 = new HashSet<>();
 	   if(dados.isPresent()){
+		   System.out.println("Tem disciplinas");
     	   
     	   List<ProfessorDisciplinasTurma>  dadosProf = dados.get();
+    	   System.out.println("*******************"+dadosProf.toString());
     	   Set<String> listaDisciplinas = new HashSet<>();
     	   for(ProfessorDisciplinasTurma d : dadosProf) {
+    		   System.out.println("Turma: "+d.getIdTurma());
+    		   System.out.println("Disciplinas: "+d.getDisciplinas().toString());
     		   listaDisciplinas.addAll(d.getDisciplinas());
     		   
     	   }
+    	   System.out.println("============> listaDisciplinas: "+listaDisciplinas);
     	   
     	   Optional<Turma> turma =  tr.findById(idTurma);
     	   if(turma.isPresent()) {
+    		   System.out.println("Entrou na Turma");
+    		   System.out.println("Curso: "+turma.get().getCurso());
+    		   System.out.println("Nivel: "+turma.get().getNivel());
     		   ArrayList<Disciplina> disciplinas =  dr.findByCursoAndNivel(turma.get().getCurso(), turma.get().getNivel());
     		   
+    		   for(Disciplina cadaC : disciplinas) {
+    			   System.out.println("Disciplina"+cadaC.getNome());
+    		   }
+    		   
     		   if(disciplinas != null) {
+    			   System.out.println("Tem Disciplinas: ");
     	    	   for(Disciplina d : disciplinas) {
+    	    		   System.out.println(" Disciplina: "+d.getNome());
     	    		   sair:
     	    		   for(String d2 :listaDisciplinas) {
+    	    			   System.out.println("d2 ="+d2+ "--- d.getNome = "+d.getNome());
     	    			   if(d.getNome().equalsIgnoreCase(d2)) {
     	    				   disciplinas2.add(d);
     	    				   break sair;

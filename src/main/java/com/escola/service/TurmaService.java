@@ -141,11 +141,20 @@ public class TurmaService {
     }
 	
    public List<TurmaDTO2> listarTurmasPorCursosNiveisETurnos2(List<Curso> cursos, List<String> niveis, List<String> turnos) {
+        int contador = 0; 
+        System.out.println("cursos: "+cursos.toString());
+        System.out.println("niveis: "+niveis.toString());
+        System.out.println("turnos: "+turnos.toString());
         
 		List<Turma> listaDeTurmas = tr.findByCursoInAndNivelInAndTurnoIn(cursos, niveis, turnos);
 		List<TurmaDTO2> t2 = new ArrayList<>();
+		System.out.println("Tentando entrar na turma");
 		if(listaDeTurmas != null) {
+			System.out.println("Entrou na turma");
+			System.out.println("turmasFiltradas: "+listaDeTurmas.toString());
 			for(Turma turma : listaDeTurmas) {
+				++contador;
+				System.out.println("Contador = "+contador);
 				TurmaDTO2 t = new TurmaDTO2();
 				t.setId(turma.getId());
 				t.setNome(turma.getNome());

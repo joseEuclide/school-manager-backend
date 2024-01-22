@@ -43,18 +43,19 @@ public class LoginService {
 		login2.setMensagem("Não Existe Ninguém Na Escola Com Os Dados Informados !");
     	if(login.getUsername().equalsIgnoreCase("admin")) {
     		if(login.getPassword() != null) {
-    			Optional<Admin> admin=  adR.findByBi(null);
+    			Optional<Admin> admin=  adR.findByBi(login.getPassword());
     			if(admin.isPresent()) {
     				login2.setStatusLogin(true);
     				login2.setUsuario(admin.get());
     				login2.setId(admin.get().getId());
     				login2.setNome(admin.get().getNome());
     				login2.setFuncao("admin");
+    				login2.setMensagem("Existe Admin Com Os Dados Informados !");
     				
     			}
     		}
     		
-    	}else if(login.getUsername().equalsIgnoreCase("Tesoureiro") || login.getUsername().equalsIgnoreCase("t")) {
+    	}else if(login.getUsername().equalsIgnoreCase("Tesouraria") || login.getUsername().equalsIgnoreCase("T")) {
     		if(login.getPassword() != null) {
     			Optional<Tesouraria> tesouraria=  teR.findByBi(login.getPassword());
     			if(tesouraria.isPresent()) {
@@ -63,6 +64,7 @@ public class LoginService {
     				login2.setId(tesouraria.get().getId());
     				login2.setNome(tesouraria.get().getNome());
     				login2.setFuncao("tesouraria");
+    				login2.setMensagem("Existe Tesoureiro(a) Com Os Dados Informados !");
     			}
     		}
     	}else if(login.getUsername().equalsIgnoreCase("Secretaria") || login.getUsername().equalsIgnoreCase("s")) {
@@ -74,11 +76,14 @@ public class LoginService {
     				login2.setId(secretaria.get().getId());
     				login2.setNome(secretaria.get().getNome());
     				login2.setFuncao("secretaria");
+    				login2.setMensagem("Existe Secretario(a) Com Os Dados Informados !");
     				
     			}
     		}
     	}else if(login.getUsername().equalsIgnoreCase("Professor") || login.getUsername().equalsIgnoreCase("p")) {
+    		System.out.println("Entrou no Professor");
     		if(login.getPassword() != null) {
+    			System.out.println("Entrou no Professor 2");
     			Optional<Professor> professor=  pr.findByBi(login.getPassword());
     			if(professor.isPresent()) {
     				login2.setStatusLogin(true);
@@ -86,13 +91,14 @@ public class LoginService {
     				login2.setId(professor.get().getId());
     				login2.setNome(professor.get().getNome());
     				login2.setFuncao("professor");
+    				login2.setMensagem("Existe Professor(a) Com Os Dados Informados !");
     				
     				
     			}
     		}
     	}else if(login.getUsername().equalsIgnoreCase("aluno") && login.getPassword() != null) {
     		try {
-    			Long idAluno = Long.parseLong(login.getUsername());
+    			Long idAluno = Long.parseLong(login.getPassword());
         		Optional<Aluno> aluno=  ar.findById(idAluno);
         			if(aluno.isPresent()) {
         				login2.setStatusLogin(true);
@@ -101,6 +107,7 @@ public class LoginService {
         				login2.setIdTurma(aluno.get().getTurma().getId());
         				login2.setNome(aluno.get().getNome());
         				login2.setFuncao("aluno");
+        				login2.setMensagem("Existe aluno(a) Com Os Dados Informados !");
         				
         			}
     		}catch (Exception e) {

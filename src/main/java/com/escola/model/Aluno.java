@@ -18,6 +18,7 @@ public class Aluno {
 	    private Long id;
 	    private String nome;
 	    private String bi;
+	    private Double nota;
 
 	    @ManyToOne
 	    @JoinColumn(name = "turma_id") // Nome da coluna na tabela de Aluno que faz referência à Turma
@@ -35,6 +36,15 @@ public class Aluno {
 		}
 
 		
+
+	    
+		public Double getNota() {
+			return nota;
+		}
+
+		public void setNota(Double nota) {
+			this.nota = nota;
+		}
 
 		public String getNome() {
 			return nome;
