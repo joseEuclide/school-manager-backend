@@ -39,6 +39,7 @@ public class LoginService {
 
     public Login findByUsername(Login  login) {
     	Login login2 = new Login();
+    	String nome = "";
     	login2.setStatusLogin(false);
 		login2.setMensagem("Não Existe Ninguém Na Escola Com Os Dados Informados !");
     	if(login.getUsername().equalsIgnoreCase("admin")) {
@@ -48,7 +49,15 @@ public class LoginService {
     				login2.setStatusLogin(true);
     				login2.setUsuario(admin.get());
     				login2.setId(admin.get().getId());
-    				login2.setNome(admin.get().getNome());
+    				nome = admin.get().getNome();
+    				if(nome.contains(" ")) {
+    					String[] novoNome = nome.split(" ");
+    					if(novoNome != null) {
+    						// Aqui éstá a Pegar O Primeiro E O Ultimo Nome Do Integrante
+    						nome = novoNome[0] + " "+novoNome[novoNome.length-1];
+    					}
+    				}
+    				login2.setNome(nome);
     				login2.setFuncao("admin");
     				login2.setMensagem("Existe Admin Com Os Dados Informados !");
     				
@@ -62,7 +71,15 @@ public class LoginService {
     				login2.setStatusLogin(true);
     				login2.setUsuario(tesouraria.get());
     				login2.setId(tesouraria.get().getId());
-    				login2.setNome(tesouraria.get().getNome());
+    				nome = tesouraria.get().getNome();
+    				if(nome.contains(" ")) {
+    					String[] novoNome = nome.split(" ");
+    					if(novoNome != null) {
+    						// Aqui éstá a Pegar O Primeiro E O Ultimo Nome Do Integrante
+    						nome = novoNome[0] + " "+novoNome[novoNome.length-1];
+    					}
+    				}
+    				login2.setNome(nome);
     				login2.setFuncao("tesouraria");
     				login2.setMensagem("Existe Tesoureiro(a) Com Os Dados Informados !");
     			}
@@ -74,7 +91,15 @@ public class LoginService {
     				login2.setStatusLogin(true);
     				login2.setUsuario(secretaria.get());
     				login2.setId(secretaria.get().getId());
-    				login2.setNome(secretaria.get().getNome());
+    				nome = secretaria.get().getNome();
+    				if(nome.contains(" ")) {
+    					String[] novoNome = nome.split(" ");
+    					if(novoNome != null) {
+    						// Aqui éstá a Pegar O Primeiro E O Ultimo Nome Do Integrante
+    						nome = novoNome[0] + " "+novoNome[novoNome.length-1];
+    					}
+    				}
+    				login2.setNome(nome);
     				login2.setFuncao("secretaria");
     				login2.setMensagem("Existe Secretario(a) Com Os Dados Informados !");
     				
@@ -89,7 +114,15 @@ public class LoginService {
     				login2.setStatusLogin(true);
     				login2.setUsuario(professor.get());
     				login2.setId(professor.get().getId());
-    				login2.setNome(professor.get().getNome());
+    				nome = professor.get().getNome();
+    				if(nome.contains(" ")) {
+    					String[] novoNome = nome.split(" ");
+    					if(novoNome != null) {
+    						// Aqui éstá a Pegar O Primeiro E O Ultimo Nome Do Integrante
+    						nome = novoNome[0] + " "+novoNome[novoNome.length-1];
+    					}
+    				}
+    				login2.setNome(nome);
     				login2.setFuncao("professor");
     				login2.setMensagem("Existe Professor(a) Com Os Dados Informados !");
     				
@@ -105,7 +138,15 @@ public class LoginService {
         				login2.setUsuario(aluno.get());
         				login2.setId(aluno.get().getId());
         				login2.setIdTurma(aluno.get().getTurma().getId());
-        				login2.setNome(aluno.get().getNome());
+        				nome = aluno.get().getNome();
+        				if(nome.contains(" ")) {
+        					String[] novoNome = nome.split(" ");
+        					if(novoNome != null) {
+        						// Aqui éstá a Pegar O Primeiro E O Ultimo Nome Do Integrante
+        						nome = novoNome[0] + " "+novoNome[novoNome.length-1];
+        					}
+        				}
+        				login2.setNome(nome);
         				login2.setFuncao("aluno");
         				login2.setMensagem("Existe aluno(a) Com Os Dados Informados !");
         				
