@@ -13,7 +13,7 @@ import com.escola.model.Disciplina;
 import com.escola.model.Nota;
 import com.escola.model.Propina;
 import com.escola.model.Turma;
-import com.escola.relatorio.RelatorioService;
+import com.escola.relatorio.service.RelatorioService;
 import com.escola.repository.AlunoRepository;
 import com.escola.repository.DisciplinaRepository;
 import com.escola.repository.NotaRepository;
@@ -65,7 +65,7 @@ public class AlunoService {
         		Aluno aluno2 =ar.saveAndFlush(aluno);
         		byte[] pdfBytes = null;
 				try {
-					pdfBytes = relatorioService.gerarRelatorioAlunoMatricula(aluno2);
+					pdfBytes = relatorioService.gerarRelatorioMAtricula(null,aluno2);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -30,7 +30,7 @@ import com.escola.model.Nota;
  */
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200") // Permite CORS para este controlador
+@CrossOrigin(origins = "*") // Permite CORS para este controlador
 public class AlunoController {
 
     @Autowired

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.escola.model.Aluno;
-import com.escola.relatorio.RelatorioService;
+import com.escola.relatorio.service.RelatorioService;
 import com.escola.service.AlunoService;
 
 @RestController
@@ -34,7 +34,7 @@ public class RelatorioController {
         try {
             Aluno aluno = as.obterAlunoPorId(alunoId); // Obtenha os dados do aluno
 
-            byte[] pdfBytes = relatorioService.gerarRelatorioAlunoPropina(aluno);
+            byte[] pdfBytes = relatorioService.gerarRelatorioMAtricula(null,aluno);
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);

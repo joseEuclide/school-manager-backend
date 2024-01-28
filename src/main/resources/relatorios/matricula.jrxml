@@ -17,6 +17,13 @@
 			<![CDATA[]]>
 		</queryString>
 	</subDataset>
+	<parameter name="instituicao" class="java.lang.String"/>
+	<parameter name="estudante" class="java.lang.String"/>
+	<parameter name="curso" class="java.lang.String"/>
+	<parameter name="turno" class="java.lang.String"/>
+	<parameter name="nivel" class="java.lang.String"/>
+	<parameter name="turma" class="java.lang.String"/>
+	<parameter name="id" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -46,28 +53,28 @@
 					<text><![CDATA[Relatório]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="0" y="10" width="349" height="79" forecolor="#FFFFFF" uuid="c34c0c74-3d4c-4554-b0c0-a86d2624a8da"/>
+					<reportElement x="10" y="97" width="310" height="64" forecolor="#FFFFFF" uuid="c34c0c74-3d4c-4554-b0c0-a86d2624a8da"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="22" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{instituicao}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$P{instituicao}]]></textFieldExpression>
 				</textField>
 				<break>
 					<reportElement x="0" y="35" width="100" height="1" uuid="485c3029-8ee2-4c3e-a636-2fccdd4ad56c"/>
 				</break>
+				<staticText>
+					<reportElement x="60" y="21" width="186" height="50" forecolor="#FFFFFF" uuid="1439a518-e408-40df-907c-15d9f8e91cb6"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="19" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Matricula]]></text>
+				</staticText>
 			</frame>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="247">
+		<band height="273">
 			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-			<staticText>
-				<reportElement x="39" y="16" width="186" height="50" uuid="1439a518-e408-40df-907c-15d9f8e91cb6"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="19" isBold="true" isItalic="true"/>
-				</textElement>
-				<text><![CDATA[Matrícula]]></text>
-			</staticText>
 			<staticText>
 				<reportElement x="0" y="95" width="90" height="28" uuid="ca4447eb-e2d2-454d-b1a3-4035299f24dc"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
@@ -80,7 +87,7 @@
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="14"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{estudante}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{estudante}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="125" width="90" height="28" uuid="1484608e-827d-4bef-8ad0-6f8a58f71ecd"/>
@@ -94,7 +101,7 @@
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="14"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{curso}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{curso}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="-1" y="154" width="90" height="28" uuid="d4a2c35e-4c1e-40a4-91a4-e834dce41473"/>
@@ -108,7 +115,7 @@
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="14" isBold="true" isItalic="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{turno}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{turno}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="184" width="90" height="28" uuid="0ca4ec50-a8f7-46a3-b60b-03a7e780c43b"/>
@@ -122,7 +129,7 @@
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="14"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{nivel}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{nivel}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="316" y="19" width="212" height="50" uuid="9d17908e-5a52-4e35-ab6d-ce413c1437bb"/>
@@ -143,7 +150,7 @@
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="14"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{turma}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{turma}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="30" y="80" width="470" height="3" uuid="5836ed5e-9d93-4585-9512-683dcce4bdee"/>
@@ -151,8 +158,36 @@
 					<pen lineWidth="8.0" lineColor="#2F2682"/>
 				</graphicElement>
 			</line>
+			<staticText>
+				<reportElement x="3" y="240" width="90" height="28" uuid="c1d64e15-8117-4c35-8e63-a8bba60e29a1"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[ID:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="93" y="240" width="439" height="28" uuid="ef727562-3f33-4d1d-a11c-ac4b9dd53ee3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{id}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
+	<columnFooter>
+		<band height="215">
+			<frame>
+				<reportElement x="2" y="15" width="552" height="95" uuid="76a62faa-b9bf-49bc-b022-091364ceb2cd"/>
+				<textField>
+					<reportElement x="28" y="10" width="472" height="85" forecolor="#A60B08" uuid="4c3bb84d-1c17-4e54-8604-4d7dda8f6b4d"/>
+					<textElement textAlignment="Center">
+						<font size="11" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Confirmamos que O Estudante "+$P{estudante} +" Foi Matriculado(a)  no "+$P{instituicao}+" Com Sucesso na data acima Mencionada."]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</columnFooter>
 	<pageFooter>
 		<band/>
 	</pageFooter>
