@@ -5,6 +5,7 @@ public class Relatorio {
 	private Boolean retorno;
 	private byte[] novoRelatorio;
 	private String mensagem;
+	private String relatorio;
 	
 	
 	
@@ -26,6 +27,13 @@ public class Relatorio {
 	public void setMensagem(String mensagem) {
 		this.mensagem = mensagem;
 	}
+	public String getRelatorio() {
+		return relatorio;
+	}
+	public void setRelatorio(String relatorio) {
+		this.relatorio = relatorio;
+	}
+	
 	
 	
 }

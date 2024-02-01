@@ -63,16 +63,6 @@ public class AlunoService {
         		relatorio.setMensagem("Aluno Cadastrado Com Sucesso");
         		// relatorio.setRetorno(null);
         		Aluno aluno2 =ar.saveAndFlush(aluno);
-        		byte[] pdfBytes = null;
-				try {
-					pdfBytes = relatorioService.gerarRelatorioMAtricula(null,aluno2);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-        		relatorio.setNovoRelatorio(pdfBytes);
-        		
-        		
         		
         		ArrayList<Disciplina> disciplinasDaTurma = dr.findByCursoAndNivel(turma.get().getCurso(), turma.get().getNivel());
         		for(Disciplina cadaC : disciplinasDaTurma) {
@@ -127,6 +117,14 @@ public class AlunoService {
 				p.setDezembro(0.0);
 
         		pr.saveAndFlush(p);
+        		byte[] pdfBytes = null;
+				try {
+					pdfBytes = relatorioService.gerarRelatorioMAtricula(null,aluno2);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+        		relatorio.setNovoRelatorio(pdfBytes);
 				
         	}else {
         		relatorio.setMensagem("Ja Existe Um Aluno Cadastrado Com o BI = "+alunoDTO.getBi());

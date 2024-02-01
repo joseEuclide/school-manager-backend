@@ -1,8 +1,11 @@
 package com.escola.controller;
 
+
+
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import com.escola.dto.AlunoDTO;
 import com.escola.dto.Relatorio;
@@ -40,10 +44,18 @@ public class AlunoController {
     private NotaService ns;
     
 
-    @PostMapping(value =  "/cadastrar-aluno/{idTurma}", consumes = "application/json",produces = "application/json")
+    @PostMapping(value =  "/cadastrar-aluno/{idTurma}", consumes = "application/json")
     public ResponseEntity<Relatorio> cadastrarAluno(@RequestBody AlunoDTO aluno, @PathVariable Long idTurma) {
         Relatorio alunoCadastrado = as.cadastrar(aluno,idTurma);
-        return ResponseEntity.ok(alunoCadastrado);
+        
+        if(alunoCadastrado!= null) {
+        	String relatorio = "data:application/pdf;base64,"+ Base64.encodeBase64String(alunoCadastrado.getNovoRelatorio());
+        	alunoCadastrado.setRelatorio(relatorio);
+        	return ResponseEntity.ok(alunoCadastrado);
+        }else {
+        	return ResponseEntity.status(500).body(null);
+        }
+        
     }
     
     @GetMapping(value =  "/alunos-da-turma/{idTurma}", produces = "application/json")

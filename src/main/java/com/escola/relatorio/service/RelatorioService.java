@@ -24,6 +24,7 @@ public class RelatorioService {
 	        // Carrega o arquivo .jrxml (modelo do relatório)
 	        InputStream inputStream = getClass().getResourceAsStream("/relatorios/matricula.jrxml");
 
+	        
 	        // Compila o modelo
 	        JasperReport jasperReport = JasperCompileManager.compileReport(inputStream);
 
@@ -38,12 +39,14 @@ public class RelatorioService {
 	         parametros.put("turno", aluno.getTurma().getTurno());
 	         parametros.put("nivel", aluno.getTurma().getNivel());
 	         parametros.put("estudante", aluno.getNome());
-	         parametros.put("id", aluno.getId());
-	         parametros.put("turma", aluno.getTurma().getNome());
+	         parametros.put("id", aluno.getId()+"");
+	         parametros.put("turma", aluno.getTurma().getId()+""); 
 
 	        // Gera o relatório
 	        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametros, dataSource);
 
+	        // Visualize o relatório
+            //JasperViewer.viewReport(jasperPrint, false);
 	        // Exporta para o formato desejado (PDF no caso)
 	        byte[] relatorioPDF = JasperExportManager.exportReportToPdf(jasperPrint);
 	        
