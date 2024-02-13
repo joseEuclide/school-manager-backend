@@ -43,6 +43,8 @@ public class AlunoService {
     
     @Autowired
     private RelatorioService relatorioService;
+    
+    
 
     
     //@Autowired
@@ -119,12 +121,13 @@ public class AlunoService {
         		pr.saveAndFlush(p);
         		byte[] pdfBytes = null;
 				try {
-					pdfBytes = relatorioService.gerarRelatorioMAtricula(null,aluno2);
+					pdfBytes =  relatorioService.gerarRelatorioMAtricula(null,aluno2,"matricula");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
         		relatorio.setNovoRelatorio(pdfBytes);
+        		
 				
         	}else {
         		relatorio.setMensagem("Ja Existe Um Aluno Cadastrado Com o BI = "+alunoDTO.getBi());

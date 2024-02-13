@@ -43,6 +43,8 @@ public class AlunoController {
     @Autowired
     private NotaService ns;
     
+    
+    
 
     @PostMapping(value =  "/cadastrar-aluno/{idTurma}", consumes = "application/json")
     public ResponseEntity<Relatorio> cadastrarAluno(@RequestBody AlunoDTO aluno, @PathVariable Long idTurma) {
@@ -50,6 +52,10 @@ public class AlunoController {
         
         if(alunoCadastrado!= null) {
         	String relatorio = "data:application/pdf;base64,"+ Base64.encodeBase64String(alunoCadastrado.getNovoRelatorio());
+        	
+        	// Definir o Caminho do Relatorio
+        	//String caminhoRelatorio = rs.caminhoRelatorio("matricula");
+        	
         	alunoCadastrado.setRelatorio(relatorio);
         	return ResponseEntity.ok(alunoCadastrado);
         }else {

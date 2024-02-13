@@ -19,7 +19,7 @@ public class CursoService {
 	public Curso cadastrar(Curso curso) {
 		Optional<Curso> curso2 =cr.findByNome(curso.getNome());
 		if(curso2.isPresent()) {
-			return new Curso();
+			return null;
 		}else {
 			return cr.save(curso);
 		}

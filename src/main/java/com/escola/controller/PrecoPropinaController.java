@@ -28,9 +28,13 @@ public class PrecoPropinaController {
         return pps.listarTodosPrecos();
     }
 
+    
+
     @PostMapping(value="/precos-das-propinas-2", consumes="application/json")
     public List<PrecoPropina> cadastrarPrecos(@RequestBody List<PrecoPropina> precos) {
         return pps.cadastrarPrecos(precos);
     }
+
+    
 
 }

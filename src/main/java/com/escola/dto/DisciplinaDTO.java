@@ -4,6 +4,7 @@ public class DisciplinaDTO {
 	
   private String nome;
   private String[] niveis;
+  private String mensagem;
   
   
   
@@ -13,6 +14,14 @@ public class DisciplinaDTO {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+    public String getMensagem() {
+		return mensagem;
+	}
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
+	}
+
 	public String[] getNiveis() {
 		return niveis;
 	}

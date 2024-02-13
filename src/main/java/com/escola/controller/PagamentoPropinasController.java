@@ -13,13 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.escola.dto.PagamentoDTO;
 import com.escola.dto.PropinaDTO;
-import com.escola.service.PropinaService;
 import com.escola.model.Propina;
+import com.escola.service.PropinaService;
 
 @RestController
 @CrossOrigin(origins = "*")
 public class PagamentoPropinasController {
     private final PropinaService propinaService;
+    
+  
 
     @Autowired
     public PagamentoPropinasController(PropinaService propinaService) {
@@ -30,7 +32,10 @@ public class PagamentoPropinasController {
     public ResponseEntity<PagamentoDTO> registrarPagamentoPropina(
         @RequestBody PropinaDTO propinaDTO
     ) throws Exception {
+    	
+    	
     	PagamentoDTO statusPagamento = propinaService.registrarPagamento(propinaDTO );
+    	
         return new ResponseEntity<>(statusPagamento, HttpStatus.CREATED);
     }
     

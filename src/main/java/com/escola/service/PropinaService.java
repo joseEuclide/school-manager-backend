@@ -9,10 +9,12 @@ import org.springframework.stereotype.Service;
 
 import com.escola.dto.PagamentoDTO;
 import com.escola.dto.PropinaDTO;
+import com.escola.dto.TesourariaDTO;
 import com.escola.model.Aluno;
 import com.escola.model.PrecoPropina;
 import com.escola.model.Propina;
 import com.escola.model.Turma;
+import com.escola.relatorio.service.RelatorioService;
 //import com.escola.relatorio.RelatorioService;
 import com.escola.repository.AlunoRepository;
 import com.escola.repository.PrecoPropinaRepository;
@@ -34,6 +36,9 @@ public class PropinaService {
 	@Autowired
     private PrecoPropinaRepository ppr;
 	
+	@Autowired
+    private RelatorioService rs;
+	
 	//@Autowired
     //private RelatorioService relatorioService;
 
@@ -45,8 +50,12 @@ public class PropinaService {
         PagamentoDTO p = new PagamentoDTO();
     	Optional<Turma> t2 = tr.findById(propinaDTO.getIdTurma());
     	String statusPagamento="";
+    	ArrayList<TesourariaDTO> listaDePagamentos = new ArrayList<>();
+    	Aluno aluno2 = null;
+    	
         Optional<Aluno> aluno = ar.findById(propinaDTO.getIdAluno());
         if(aluno.isPresent() && t2.isPresent()) {
+        	 aluno2 = aluno.get();
         	 Optional<Propina> prop =pr.findByAlunoAndTurma(aluno.get(), t2.get());
              if(prop.isPresent()) {
             	 
@@ -54,44 +63,102 @@ public class PropinaService {
             		 Optional<PrecoPropina> p3 =  ppr.findByIdCursoAndNivel(t2.get().getCurso().getId(), t2.get().getNivel());
             	     if(p3.isPresent() && propinaDTO.getMesesAPagar() != null) {
             	    	 prop.get().setData(LocalDate.now());
+            	    	// Depois do dia 15 do corrente mes Vao Pagar Com Multa de 3000 Kz
+        	    		 
+        	    		 int diaHoje = LocalDate.now().getDayOfMonth();
+        	    		 
             	    	 
             	    	 for (String c : propinaDTO.getMesesAPagar()) {
-            	    		 if(c.equalsIgnoreCase("setembro")) {
-            	    			 prop.get().setSetembro(p3.get().getValor());
+            	    		 
+            	    		 TesourariaDTO tDTO = new TesourariaDTO();
+            	    		 tDTO.setMes(c);
+            	    		 
+            	    		 
+            	    		 if(diaHoje > 15) {
+            	    			 tDTO.setMultaPropina(3000);
+            	    			 tDTO.setPropina(p3.get().getValor() + 3000);
+            	    			 
+            	    			 if(c.equalsIgnoreCase("setembro")) {
+                	    			 prop.get().setSetembro(p3.get().getValor() + 3000);
+                	    		 }
+                	    		 if(c.equalsIgnoreCase("Outubro")) {
+                	    			 prop.get().setOutubro(p3.get().getValor() + 3000);
+                	    		 }
+                	    		 if(c.equalsIgnoreCase("Novembro")) {
+                	    			 prop.get().setNovembro(p3.get().getValor() + 3000);
+                	    		 }
+                	    		 if(c.equalsIgnoreCase("Dezembro")) {
+                	    			 prop.get().setDezembro(p3.get().getValor() + 3000);
+                	    		 }
+                	    		 if(c.equalsIgnoreCase("Janeiro")) {
+                	    			 prop.get().setJaneiro(p3.get().getValor() + 3000);
+                	    		 }
+                	    		 if(c.equalsIgnoreCase("Fevereiro")) {
+                	    			 prop.get().setFevereiro(p3.get().getValor() + 3000);
+                	    		 }
+                	    		 if(c.equalsIgnoreCase("Marco")) {
+                	    			 prop.get().setMarco(p3.get().getValor() + 3000);
+                	    		 }
+                	    		 if(c.equalsIgnoreCase("Abril")) {
+                	    			 prop.get().setAbril(p3.get().getValor() + 3000);
+                	    		 }
+                	    		 if(c.equalsIgnoreCase("Maio")) {
+                	    			 prop.get().setMaio(p3.get().getValor() + 3000);
+                	    		 }
+                	    		 if(c.equalsIgnoreCase("Junho")) {
+                	    			 prop.get().setJunho(p3.get().getValor() + 3000);
+                	    		 }
+                	    		 if(c.equalsIgnoreCase("Julho")) {
+                	    			 prop.get().setJulho(p3.get().getValor() + 3000);
+                	    		 }
+                	    		 if(c.equalsIgnoreCase("Agosto")) {
+                	    			 prop.get().setAgosto(p3.get().getValor() + 3000);
+                	    		 }
+            	    		 }else {
+            	    			 tDTO.setMultaPropina(0);
+            	    			 tDTO.setPropina(p3.get().getValor());
+            	    			 
+            	    			 if(c.equalsIgnoreCase("setembro")) {
+                	    			 prop.get().setSetembro(p3.get().getValor());
+                	    		 }
+                	    		 if(c.equalsIgnoreCase("Outubro")) {
+                	    			 prop.get().setOutubro(p3.get().getValor());
+                	    		 }
+                	    		 if(c.equalsIgnoreCase("Novembro")) {
+                	    			 prop.get().setNovembro(p3.get().getValor());
+                	    		 }
+                	    		 if(c.equalsIgnoreCase("Dezembro")) {
+                	    			 prop.get().setDezembro(p3.get().getValor());
+                	    		 }
+                	    		 if(c.equalsIgnoreCase("Janeiro")) {
+                	    			 prop.get().setJaneiro(p3.get().getValor());
+                	    		 }
+                	    		 if(c.equalsIgnoreCase("Fevereiro")) {
+                	    			 prop.get().setFevereiro(p3.get().getValor());
+                	    		 }
+                	    		 if(c.equalsIgnoreCase("Marco")) {
+                	    			 prop.get().setMarco(p3.get().getValor());
+                	    		 }
+                	    		 if(c.equalsIgnoreCase("Abril")) {
+                	    			 prop.get().setAbril(p3.get().getValor());
+                	    		 }
+                	    		 if(c.equalsIgnoreCase("Maio")) {
+                	    			 prop.get().setMaio(p3.get().getValor());
+                	    		 }
+                	    		 if(c.equalsIgnoreCase("Junho")) {
+                	    			 prop.get().setJunho(p3.get().getValor());
+                	    		 }
+                	    		 if(c.equalsIgnoreCase("Julho")) {
+                	    			 prop.get().setJulho(p3.get().getValor());
+                	    		 }
+                	    		 if(c.equalsIgnoreCase("Agosto")) {
+                	    			 prop.get().setAgosto(p3.get().getValor());
+                	    		 }
             	    		 }
-            	    		 if(c.equalsIgnoreCase("Outubro")) {
-            	    			 prop.get().setOutubro(p3.get().getValor());
-            	    		 }
-            	    		 if(c.equalsIgnoreCase("Novembro")) {
-            	    			 prop.get().setNovembro(p3.get().getValor());
-            	    		 }
-            	    		 if(c.equalsIgnoreCase("Dezembro")) {
-            	    			 prop.get().setDezembro(p3.get().getValor());
-            	    		 }
-            	    		 if(c.equalsIgnoreCase("Janeiro")) {
-            	    			 prop.get().setJaneiro(p3.get().getValor());
-            	    		 }
-            	    		 if(c.equalsIgnoreCase("Fevereiro")) {
-            	    			 prop.get().setFevereiro(p3.get().getValor());
-            	    		 }
-            	    		 if(c.equalsIgnoreCase("Marco")) {
-            	    			 prop.get().setMarco(p3.get().getValor());
-            	    		 }
-            	    		 if(c.equalsIgnoreCase("Abril")) {
-            	    			 prop.get().setAbril(p3.get().getValor());
-            	    		 }
-            	    		 if(c.equalsIgnoreCase("Maio")) {
-            	    			 prop.get().setMaio(p3.get().getValor());
-            	    		 }
-            	    		 if(c.equalsIgnoreCase("Junho")) {
-            	    			 prop.get().setJunho(p3.get().getValor());
-            	    		 }
-            	    		 if(c.equalsIgnoreCase("Julho")) {
-            	    			 prop.get().setJulho(p3.get().getValor());
-            	    		 }
-            	    		 if(c.equalsIgnoreCase("Agosto")) {
-            	    			 prop.get().setAgosto(p3.get().getValor());
-            	    		 }
+            	    		 //listaDePagamentos.add(tDTO);
+            	    		 
+            	    		 
+            	    		 
             	    	 }
                     	 
                     	 
@@ -99,17 +166,23 @@ public class PropinaService {
                     	 statusPagamento = "Pagamento Efectuado Com Sucesso !";
                     	 p.setMensagem(statusPagamento);
 
-                         //byte[] pdfBytes = relatorioService.gerarRelatorioAlunoPropina(aluno.get());
-            	         p.setRelatorio(null);
+                    	 if(aluno2 != null && listaDePagamentos!=null) {
+                    		 rs.gerarRelatorioMAtricula(listaDePagamentos, aluno2,"propina"); 
+                    	 }
+                    	 
+                    	 String caminhoRelatorio = rs.caminhoRelatorio("propina");
+            	         p.setRelatorio(caminhoRelatorio);
             	     }
             	 
             	 
              }else {
             	 statusPagamento = "Não Existe Registro De Propina Para Esse Aluno !";
+            	 p.setMensagem(statusPagamento);
              }
              
         }else {
         	statusPagamento = "Não Existe Aluno Com Esse ID Na Escola !";
+        	p.setMensagem(statusPagamento);
         }
        
        return p; 
@@ -132,8 +205,8 @@ public class PropinaService {
                  if(prop.isPresent()) {
             	 System.out.println("==========> "+prop.get().getMarco());
 		                	 
-            	    		 
             	    		 if(prop.get().getJaneiro()==0) {
+            	    			 
             	    			 System.out.println("Janeiro");
             	    			 mesesAPagar.add("Janeiro");
             	    		 }
@@ -193,6 +266,14 @@ public class PropinaService {
                              p4.setMensagem("Existe Aluno Com os Dados Informados");
                     	     p4.setMesesAPagar(mesesAPagar);
                     	     
+                    	     int diaHoje = LocalDate.now().getDayOfMonth();
+                    	     if(diaHoje > 15) {
+                    	    	 p4.setMulta(3000+"");
+                    	     }
+                    	     Optional<PrecoPropina> p3 =  ppr.findByIdCursoAndNivel(t2.get().getCurso().getId(), t2.get().getNivel());
+                    	     if(p3.isPresent()) {
+                    	    	 p4.setPropina(p3.get().getValor()+"");
+                    	     }
                     	  
             	     
             	 

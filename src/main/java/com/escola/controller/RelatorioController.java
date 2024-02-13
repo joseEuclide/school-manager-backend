@@ -30,17 +30,17 @@ public class RelatorioController {
     }
 
     @GetMapping("/relatorio-aluno/{alunoId}")
-    public ResponseEntity<byte[]> imprimirRelatorioAluno(@PathVariable Long alunoId) {
+    public ResponseEntity<String> imprimirRelatorioAluno(@PathVariable Long alunoId) {
         try {
             Aluno aluno = as.obterAlunoPorId(alunoId); // Obtenha os dados do aluno
 
-            byte[] pdfBytes = relatorioService.gerarRelatorioMAtricula(null,aluno);
+            /*byte[] pdfBytes =*/ relatorioService.gerarRelatorioMAtricula(null,aluno,"qualquer relatorio");
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
             headers.setContentDispositionFormData("attachment", "relatorio_aluno.pdf");
 
-            return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
+            return new ResponseEntity<>(null, headers, HttpStatus.OK);
         } catch (Exception e) {
             // Lida com erros, por exemplo, aluno não encontrado, erro de geração de relatório, etc.
             e.printStackTrace();

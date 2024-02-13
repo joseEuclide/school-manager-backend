@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.escola.dto.Relatorio;
 import com.escola.model.CalendarioProvas;
 import com.escola.service.CalendarioProvasService;
 
@@ -24,9 +25,11 @@ public class CalendarioProvasController {
     }
 
     @PostMapping("/cadastrar-Calendario-Provas")
-    public ResponseEntity<String> cadastrarProva(@RequestBody List<CalendarioProvas> prova) {
+    public ResponseEntity<Relatorio> cadastrarProva(@RequestBody List<CalendarioProvas> prova) {
+        Relatorio r = new Relatorio();
         String calendarioProva = calendarioProvasService.cadastrarProva(prova);
-        return new ResponseEntity<>(calendarioProva, HttpStatus.CREATED);
+        r.setMensagem(calendarioProva);
+        return new ResponseEntity<>(r, HttpStatus.CREATED);
     }
 
     // Implemente outros endpoints para consultar, atualizar e excluir provas do calendário
