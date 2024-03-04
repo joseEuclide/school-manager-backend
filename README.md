@@ -23,9 +23,9 @@ Este Sistema faz a gestão de Diversos departamentos de Uma Instituição Escola
 Desde a parte Administrativa até a parte pedagogica, Para ser mais Especifico, temos as
 seguintes partes no sistema: Administrativa, Secretaria, Finança, Professor e Aluno.
 
-1. Admin: Cadastra diversos recuros da Instituição como Turmas disciplinas, precos dos cursos etc ...
+1. Admin: Cadastra diversos recursos da Instituição como Turmas disciplinas, preços dos cursos etc ...
 2. Secretaria: Cadastra os Alunos na turmas Disponiveis.
-3. Financa: Faz o pagamento das propinas dos alunos com base ao precos dos cursos Cadastrados
+3. Finança: Faz o pagamento das propinas dos alunos com base ao precos dos cursos Cadastrados
 4. Professor Lanca As notas nas dos Alunos que ele leciona as Aulas na turmas específicas
 5. Aluno tem a capacidade de ver as notas lancadas e as os pagamentos efectuados.
 
