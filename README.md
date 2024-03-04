@@ -12,8 +12,8 @@ Para o meu Aprendizado contínuo com Spring eu uso bastante as Aula da Michelli 
 ## 
 # Projecto: Gestão De Uma Instituição Escolar
 
-## Contactos
-Criado por Jose dos Santos
+## Meus Contactos
+Criado por Jose dos Santos <br> 
 Linkdin: https://www.linkedin.com/in/jose-dos-santos-b633b317a/ <br> 
 E-mail: euclidessdossantoss@gmail.com
 ##
