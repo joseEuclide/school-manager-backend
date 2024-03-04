@@ -5,13 +5,12 @@
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 
 
-Este project é uma API construída com **Java, Spring framework(springboot, spring data) e  Mysql como o Banco Relacional.**
+Este projecto é uma API construída com **Java, Spring framework(springboot, spring data) e  Mysql como o Banco Relacional.**
 
 Para o meu Aprendizado contínuo com Spring eu uso bastante as Aula da Michelli brito, Uma Arquitecta de Software Excelente [Ver Aulas da Michelli Britol](https://www.youtube.com/@MichelliBrito)
 
-## Table of Contents
-
-# Gestão De Uma Instituição Escolar
+## 
+# Projecto: Gestão De Uma Instituição Escolar
 
 ## Contactos
 Criado por Jose dos Santos
