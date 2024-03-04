@@ -5,7 +5,7 @@
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 
 
-Este projecto é uma API construída com **Java, Spring framework(springboot, spring data) e  Mysql como o Banco Relacional.**
+Este projecto é uma API construída com **Java, Spring framework(springboot, spring data),  Mysql como o Banco Relacional, Maven, Git, Tomcat, Clean Code**
 
 Para o meu Aprendizado contínuo com Spring eu uso bastante as Aula da Michelli brito, Uma Arquitecta de Software Excelente [Ver Aulas da Michelli Britol](https://www.youtube.com/@MichelliBrito)
 
@@ -15,7 +15,8 @@ Para o meu Aprendizado contínuo com Spring eu uso bastante as Aula da Michelli 
 ## Meus Contactos
 Criado por Jose dos Santos <br> 
 Linkdin: https://www.linkedin.com/in/jose-dos-santos-b633b317a/ <br> 
-E-mail: euclidessdossantoss@gmail.com
+E-mail: euclidessdossantoss@gmail.com <br>
+Minha Formação em JAVA SE (Standard Edition) na Universidade XTI,  [Clique Aquil](https://www.youtube.com/watch?v=NZDzuve7kho&list=PLxQNfKs8YwvGhXHbHtxtoB-tRRv6r3Rlr)
 ##
 
 Este Sistema faz a gestão de Diversos departamentos de Uma Instituição Escolar 
